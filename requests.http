@@ -1,0 +1,42 @@
+### 1. Create Student – VALID
+POST http://localhost:8080/students
+Content-Type: application/json
+
+{
+  "name": "Alice",
+  "course": "Physics"
+}
+
+### 2. Create Student – MISSING NAME (should trigger @NotBlank validation)
+POST http://localhost:8080/students
+Content-Type: application/json
+
+{
+  "name": "",
+  "course": "Chemistry"
+}
+
+### 3. Get All Students
+GET http://localhost:8080/students
+
+### 4. Get Student by ID – Valid ID (change the ID after inserting to match real one)
+GET http://localhost:8080/students/1
+
+### 5. Get Student by ID – INVALID ID (should trigger StudentNotFoundException)
+GET http://localhost:8080/students/999
+
+### 6. Delete Student by ID – VALID (change ID to real one)
+DELETE http://localhost:8080/students/1
+
+### 7. Delete Student by ID – NON-EXISTENT (should trigger StudentNotFoundException)
+DELETE http://localhost:8080/students/999
+
+### 8. Create Duplicate – Violate constraint (optional test if unique constraint is added)
+# Only works if you enforce a unique constraint on name or some other field.
+POST http://localhost:8080/students
+Content-Type: application/json
+
+{
+  "name": "Alice",
+  "course": "Biology"
+}
